@@ -17,4 +17,14 @@ class car:
     def accelerate(self):
         if self.speed + 10 > self.topspeed:
             self.speed = self.topspeed
-            raise Exception(f)
+            raise Exception(f"Cannot accelerate above top speed: {self.topspeed}")
+        
+    def decelerate(self):
+        if self.speed - 10 < 0:
+            self.speed = 0
+            raise Exception("Cannot decelerate below zero")
+        self.speed -= 10
+
+    def __str__(self):
+        return f"Car going {self.speed}/{self.topspeed} kmph"
+    

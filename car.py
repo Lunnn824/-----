@@ -55,3 +55,41 @@ try:
     car1.settopspeed(new_top_speed)
 except ValueError as e:
     print(e)
+
+#3.1
+class SpeedException(Exception):
+    pass
+
+class Car:
+    def __init__(self, top_speed):
+        self.speed = 0
+        self.setTopSpeed(top_speed)
+
+    def setTopSpeed(self, top_speed):
+        if top_speed > 0:
+            self.topSpeed = top_speed
+        else:
+            raise SpeedException(f"Invalid top speed: {top_speed}")
+
+    def getTopSpeed(self):
+        return self.topSpeed
+
+    def getSpeed(self):
+        return self.speed
+
+    def accelerate(self):
+        if self.speed + 10 > self.topSpeed:
+            self.speed = self.topSpeed
+            raise SpeedException(f"Cannot accelerate above top speed: {self.topSpeed}")
+        else:
+            self.speed += 10
+
+    def decelerate(self):
+        if self.speed - 10 < 0:
+            self.speed = 0
+            raise SpeedException("Cannot decelerate below zero")
+        else:
+            self.speed -= 10
+
+    def __str__(self):
+        return f"Car going {self.speed}/{self.topSpeed} kmph"

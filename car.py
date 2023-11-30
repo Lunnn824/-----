@@ -63,23 +63,23 @@ class SpeedException(Exception):
 class Car:
     def __init__(self, top_speed):
         self.speed = 0
-        self.setTopSpeed(top_speed)
+        self.settopspeed(top_speed)
 
-    def setTopSpeed(self, top_speed):
+    def settopspeed(self, top_speed):
         if top_speed > 0:
-            self.topSpeed = top_speed
+            self.topspeed = top_speed
         else:
             raise SpeedException(f"Invalid top speed: {top_speed}")
 
     def getTopSpeed(self):
-        return self.topSpeed
+        return self.topspeed
 
     def getSpeed(self):
         return self.speed
 
     def accelerate(self):
-        if self.speed + 10 > self.topSpeed:
-            self.speed = self.topSpeed
+        if self.speed + 10 > self.topspeed:
+            self.speed = self.topspeed
             raise SpeedException(f"Cannot accelerate above top speed: {self.topSpeed}")
         else:
             self.speed += 10
@@ -92,4 +92,26 @@ class Car:
             self.speed -= 10
 
     def __str__(self):
-        return f"Car going {self.speed}/{self.topSpeed} kmph"
+        return f"Car going {self.speed}/{self.topspeed} kmph"
+
+#3.2
+class NoDriverException(Exception):
+    def __init__(self):
+        super().__init__("Cannot drive without a Driver")
+
+class Car:
+    def __init__(self, top_speed):
+        self.speed = 0
+        self.settopspeed(top_speed)
+        self.driver = None
+
+    def accelerate(self):
+        if self.driver is None:
+            raise NoDriverException()
+
+    def decelerate(self):
+        if self.driver is None:
+            raise NoDriverException()
+    
+    def setDriver(self, driver):
+        self.driver = driver

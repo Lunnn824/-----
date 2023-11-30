@@ -1,4 +1,4 @@
-class car:
+class Car:
     def __init__(self, top_speed):
         self.settopspeed(top_speed)
         self.speed = 0
@@ -27,4 +27,31 @@ class car:
 
     def __str__(self):
         return f"Car going {self.speed}/{self.topspeed} kmph"
-    
+
+car1 = Car(250)
+print(car1)
+
+try:
+    car2 = Car(-99)
+    print(car2)
+except Exception as e:
+    print(e)
+
+try:
+    for _ in range(30):
+        car1.accelerate()
+        print(car1)
+except Exception as e:
+    print(e)
+
+    for _ in range(30):
+        try:
+            car1.decelerate()
+            print(car1)
+        except Exception as e:
+            print(e)
+try:
+    new_top_speed = float(input("Enter a new top speed: "))
+    car1.settopspeed(new_top_speed)
+except ValueError as e:
+    print(e)
